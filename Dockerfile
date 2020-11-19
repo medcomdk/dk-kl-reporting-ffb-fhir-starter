@@ -12,8 +12,8 @@ RUN mkdir -p /data/hapi/lucenefiles && chmod 775 /data/hapi/lucenefiles
 
 COPY --from=fetch-hapi ./tmp /usr/local/tomcat/webapps/ROOT
 
-COPY ./templates/* /usr/local/tomcat/webapps/ROOT/WEB-INF/templates
-COPY ./img/* /usr/local/tomcat/webapps/ROOT/img/
+COPY ./templates/. /usr/local/tomcat/webapps/ROOT/WEB-INF/templates
+COPY ./img/. /usr/local/tomcat/webapps/ROOT/img/
 
 EXPOSE 8080
 
