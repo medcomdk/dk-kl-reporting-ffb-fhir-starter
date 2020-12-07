@@ -30,6 +30,7 @@ spring:
 
 hapi:
   fhir:
+    fhir_version: R4
     defer_indexing_for_codesystems_of_size: 101
     implementationguides:
       -
