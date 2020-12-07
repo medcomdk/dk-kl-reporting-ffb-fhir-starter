@@ -1,16 +1,20 @@
-FROM alpine as fetch-hapi
-
+FROM alpine/git as fetch-hapi
 WORKDIR /tmp
+RUN git clone https://github.com/hapifhir/hapi-fhir-jpaserver-starter.git /tmp
 
-RUN wget -O ROOT.war https://repo1.maven.org/maven2/ca/uhn/hapi/fhir/hapi-fhir-jpaserver-starter/5.2.0/hapi-fhir-jpaserver-starter-5.2.0.war
+##
 
-RUN unzip ROOT.war
+FROM maven:3.6.3-jdk-11-slim as build-hapi
+WORKDIR /tmp
+COPY --from=fetch-hapi /tmp /tmp
+RUN mvn -ntp clean install -DskipTests
+
+##
 
 FROM tomcat:9.0.38-jdk11-openjdk-slim-buster
-
 RUN mkdir -p /data/hapi/lucenefiles && chmod 775 /data/hapi/lucenefiles
 
-COPY --from=fetch-hapi ./tmp /usr/local/tomcat/webapps/ROOT
+COPY --from=build-hapi ./tmp/target/ROOT /usr/local/tomcat/webapps/ROOT
 
 COPY ./templates/. /usr/local/tomcat/webapps/ROOT/WEB-INF/templates
 COPY ./img/. /usr/local/tomcat/webapps/ROOT/img/
