@@ -41,7 +41,7 @@ hapi:
     tester:
         medcom:
           name: MedCom Tester
-          server_address: http://fhir.medcom.dk/fhir
+          server_address: https://fhir.medcom.dk/fhir
           refuse_to_fetch_third_party_urls: false
           fhir_version: R4
         global: 
