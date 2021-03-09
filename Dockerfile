@@ -1,6 +1,6 @@
 FROM alpine/git as fetch-hapi
 WORKDIR /tmp
-RUN git clone -b interceptor-wiring-rework https://github.com/hapifhir/hapi-fhir-jpaserver-starter.git /tmp
+RUN git clone https://github.com/hapifhir/hapi-fhir-jpaserver-starter.git /tmp
 
 ##
 
