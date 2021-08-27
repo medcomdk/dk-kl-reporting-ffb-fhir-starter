@@ -12,20 +12,22 @@ spring:
   main:
     allow-bean-definition-overriding: true
 
+
 hapi:
   fhir:
+    install_transitive_ig_dependencies: false
     ### This is the FHIR version. Choose between, dstu2, dstu3, r4 or r5
     fhir_version: R4
     defer_indexing_for_codesystems_of_size: 101
     implementationguides:
-      medcom_09:
-        url: http://build.fhir.org/ig/hl7dk/dk-medcom/package.tgz
-        name: dk.fhir.ig.medcom-core
-        version: 1.0.3
       dk-core:
         url: http://build.fhir.org/ig/hl7dk/dk-core/package.tgz
         name: dk.fhir.ig.dk-core
         version: 0.9
+      medcom:
+        url: http://build.fhir.org/ig/hl7dk/dk-medcom/package.tgz
+        name: dk.fhir.ig.medcom-core
+        version: 1.0.3
 
     enable_repository_validating_interceptor: true
 
